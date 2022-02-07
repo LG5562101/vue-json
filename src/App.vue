@@ -1,18 +1,32 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" :age="12" />
+  <p>{{ name }}</p>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
-
+import { defineComponent, ref, watchEffect } from 'vue'
+import HelloWorld from './components/HelloWorld.vue'
 export default defineComponent({
-  name: "App",
+  name: 'App',
   components: {
     HelloWorld,
   },
-});
+  setup(props) {
+    console.log(props)
+    const nameRef = ref('luoguan')
+    // setInterval(() => {
+    //   nameRef.value += '1'
+    // }, 1000)
+
+    watchEffect(() => {
+      console.log(nameRef.value)
+    })
+    return {
+      name: nameRef,
+    }
+  },
+})
 </script>
 
 <style>
